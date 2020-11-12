@@ -57,6 +57,7 @@ ticker = "DONov20"
 market_data = pyRofex.get_market_data(ticker=ticker,entries=entries, depth=5)
 
 print("Respuesta al pedido de market data para {0}: {1}".format(ticker, market_data))
+#%%
 
 # Obtener toda la info del instrumento:
 entries = [
@@ -75,6 +76,8 @@ entries = [
 ]
 market_data = pyRofex.get_market_data(ticker, entries)
 print("Market data más completa para {0}: {1}".format(ticker, market_data))
+
+#%%
 
 # Obtener datos históricos desde el comienzo del año hasta hoy
 end = datetime.date.today()
@@ -123,6 +126,8 @@ cancel_order = pyRofex.cancel_order(order["order"]["clientId"])
 # Chequear el status de la orden luego del envío de la cancelación
 pyRofex.get_order_status(cancel_order["order"]["clientId"])
 
+#%%
+
 # Obtener el estado de las órdenes de esta cuenta
-pyRofex.get_all_orders_status()
+print(pyRofex.get_all_orders_status())
 

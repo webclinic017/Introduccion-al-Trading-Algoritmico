@@ -27,11 +27,7 @@ estructura del json de config:
 pyRofex.initialize(user=cfg["user"], password=cfg["password"],account=cfg["account"], environment=pyRofex.Environment.REMARKET)
 
 #%%
-
-
-                   password="idrswM3*",
-                   account="REM5317",
-                   environment=pyRofex.Environment.REMARKET)
+     
 # Primero hay que definir las funciones callback que van a ser invocadas para cada evento        
 def market_data_handler(message):
     print("Mensaje de Market Data recibido: {0}".format(message))
@@ -54,14 +50,14 @@ instruments = ["DONov20", "DODic20"]
 entries = [pyRofex.MarketDataEntry.BIDS,
            pyRofex.MarketDataEntry.OFFERS,
            pyRofex.MarketDataEntry.LAST]
-
+#%%
 # Nos subscribimos para recibir mensajes
 pyRofex.market_data_subscription(tickers=instruments,
-                                 entries=entries)
+                                 entries=entries, depth=5)
 
 # Nos subscribimos a un instrumento inválido y vemos un error
-pyRofex.market_data_subscription(tickers=["InvalidInstrument"],
-                                 entries=entries)
+#pyRofex.market_data_subscription(tickers=["InvalidInstrument"],
+#                                 entries=entries)
 
 
 #%%
@@ -72,12 +68,14 @@ pyRofex.order_report_subscription()
 order = pyRofex.send_order(ticker="DONov20",
                    side=pyRofex.Side.BUY,
                    size=10,
-                   price=81.10,
+                   price=81.30,
                    order_type=pyRofex.OrderType.LIMIT)
 
 # Esperar 5 segunos
 time.sleep(5)
 
+
+#%%
 # Cancelar la orden
 cancel_order = pyRofex.cancel_order(order["order"]["clientId"])
 
